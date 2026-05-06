@@ -1,6 +1,6 @@
 {
   "head": {
-    "breadcrumb": "Selected work · 2012 — present",
+    "breadcrumb": "Selected work",
     "title": [
       { "text": "A few of the things " },
       { "text": "we've shipped.", "italic": true }
@@ -16,8 +16,8 @@
         "id": "foreman",
         "shotVariant": "foreman",
         "badge": { "kind": "active", "label": "In Development" },
-        "meta": "Internal · 2025–present",
-        "title": "Foreman Pipeline",
+        "meta": "Internal · 2026",
+        "title": "Foreman Run",
         "role": "AI orchestration · workflow tooling",
         "description": "An AI-agent harness with remote control. Custom workflows orchestrate work through an AI coding agent running locally or in a sandbox. We use it daily — it's part of why we can ship custom applications faster than firms our size usually can."
       },

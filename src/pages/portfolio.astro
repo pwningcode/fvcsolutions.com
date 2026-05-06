@@ -59,7 +59,10 @@ const hasPast = portfolio.past.items.length > 0;
       <div class="work-grid">
         {portfolio.active.items.map((item) => (
           <article class="work-item reveal">
-            <PortfolioShot variant={item.shotVariant} />
+            <PortfolioShot
+              variant={item.shotVariant}
+              image={item.image}
+            />
             <div class="work-meta">
               <div class="work-tags">
                 <span class:list={['badge', item.badge.kind]}>{item.badge.label}</span>
@@ -86,7 +89,10 @@ const hasPast = portfolio.past.items.length > 0;
         <div class="work-grid">
           {portfolio.past.items.map((item, i) => (
             <article class="work-item reveal">
-              <PortfolioShot variant={item.shotVariant ?? `placeholder${(i % 4) + 1}`} />
+              <PortfolioShot
+                variant={item.shotVariant ?? `placeholder${(i % 4) + 1}`}
+                image={item.image}
+              />
               <div class="work-meta">
                 <div class="work-tags">
                   <span class:list={['badge', item.badge?.kind ?? 'shipped']}>{item.badge?.label ?? 'Shipped'}</span>

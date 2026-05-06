@@ -9,7 +9,7 @@
     "primaryCta": { "label": "Schedule a call", "href": "/schedule" },
     "secondaryCta": { "label": "See what we build", "href": "/portfolio" },
     "meta": [
-      { "label": "Est. 2012", "sub": "Greater Columbus, OH" },
+      { "label": "Est. 1999", "sub": "Greater Columbus, OH" },
       { "label": "2 principals", "sub": "No subcontractors" },
       { "label": "$5k — $30k", "sub": "Typical project range" },
       { "label": "3—8 weeks", "sub": "Typical delivery" }

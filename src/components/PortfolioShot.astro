@@ -1,14 +1,31 @@
 ---
-interface Props {
-  variant: string;
+interface ImageRef {
+  src: string;
+  alt: string;
+  eager?: boolean;
 }
 
-const { variant } = Astro.props;
+interface Props {
+  variant?: string;
+  image?: ImageRef;
+}
+
+const { variant, image } = Astro.props;
+const useImage = !!image;
+const fallbackVariant = variant ?? 'placeholder1';
 ---
 
-<div class:list={['shot', `shot-${variant}`]} aria-hidden="true">
+<div class:list={['shot', useImage ? 'shot-image' : `shot-${fallbackVariant}`]} aria-hidden={useImage ? undefined : 'true'}>
   <div class="shot-inner">
-    {variant === 'foreman' && (
+    {useImage && (
+      <img
+        src={image.src}
+        alt={image.alt}
+        loading={image.eager ? 'eager' : 'lazy'}
+        decoding="async"
+      />
+    )}
+    {!useImage && fallbackVariant === 'foreman' && (
       <>
         <div class="pipe p1"></div>
         <div class="pipe p2"></div>
@@ -17,7 +34,7 @@ const { variant } = Astro.props;
         <div class="pipe p1"></div>
       </>
     )}
-    {variant === 'downbad' && (
+    {!useImage && fallbackVariant === 'downbad' && (
       <>
         <div class="row"><span class="dot"></span><span>api.example.com</span><div class="bar"></div><span class="ms">142ms</span></div>
         <div class="row"><span class="dot"></span><span>checkout.shop.io</span><div class="bar"></div><span class="ms">89ms</span></div>
@@ -27,7 +44,7 @@ const { variant } = Astro.props;
         <div class="row"><span class="dot cold"></span><span>staging.app.io</span><div class="bar"></div><span class="ms">—</span></div>
       </>
     )}
-    {variant.startsWith('placeholder') && (
+    {!useImage && fallbackVariant.startsWith('placeholder') && (
       <span class="ph-text">Project screenshot</span>
     )}
   </div>
@@ -67,6 +84,17 @@ const { variant } = Astro.props;
     inset: 22px 0 0 0;
     display: flex;
     overflow: hidden;
+  }
+
+  .shot-image .shot-inner {
+    background: var(--bg);
+  }
+  .shot-image .shot-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
   }
 
   .shot-foreman .shot-inner {
