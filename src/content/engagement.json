@@ -1,0 +1,45 @@
+{
+  "label": "03 · Engagement",
+  "title": "Three ways to work with us.",
+  "lede": "Pick the shape that fits. Or tell us about your problem and we'll suggest which one makes sense.",
+  "items": [
+    {
+      "tag": "Starter",
+      "name": "Discovery",
+      "price": "$5,000 · 2 weeks",
+      "description": "For when you know AI should help somewhere in your business but don't know where to start.",
+      "features": [
+        "Stakeholder interviews",
+        "Process & data audit",
+        "Written recommendation",
+        "Scoped build proposal"
+      ]
+    },
+    {
+      "tag": "★ Most common",
+      "featured": true,
+      "name": "Build",
+      "price": "$15,000 — $30,000 · 4 to 8 weeks",
+      "description": "One well-scoped application, designed, built, tested, and handed off. Our typical engagement.",
+      "features": [
+        "Everything in Discovery",
+        "Design, build, and deploy",
+        "Evaluation harness included",
+        "Full source code & documentation",
+        "30 days of post-launch support"
+      ]
+    },
+    {
+      "tag": "Advisory",
+      "name": "Review",
+      "price": "$5,000 · 1 week",
+      "description": "For teams already building with AI who want a second pair of eyes on architecture, prompts, or evaluations.",
+      "features": [
+        "Codebase & architecture review",
+        "Prompt & evaluation critique",
+        "Written findings & action list",
+        "Follow-up working session"
+      ]
+    }
+  ]
+}

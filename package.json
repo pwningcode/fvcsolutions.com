@@ -1,0 +1,23 @@
+{
+  "name": "fvcsolutions-com",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "icons": "node scripts/generate-icons.mjs",
+    "fonts": "node scripts/sync-fonts.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.6.0",
+    "@fontsource-variable/jetbrains-mono": "^5.2.5",
+    "@fontsource-variable/manrope": "^5.2.5",
+    "@fontsource/instrument-serif": "^5.2.5",
+    "@vite-pwa/astro": "^1.1.0",
+    "astro": "^5.18.0",
+    "sharp": "^0.34.4"
+  }
+}

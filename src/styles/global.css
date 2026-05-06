@@ -1,0 +1,183 @@
+/* Self-hosted Latin font subsets — sourced from @fontsource via npm run fonts */
+@font-face {
+  font-family: 'Manrope Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url('/fonts/manrope-latin-wght.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('/fonts/instrument-serif-latin-400.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 400;
+  src: url('/fonts/instrument-serif-latin-400-italic.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'JetBrains Mono Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  src: url('/fonts/jetbrains-mono-latin-wght.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  --bg: #0d0f0d;
+  --bg-2: #131613;
+  --ink: #f1ede4;
+  --ink-dim: #b0ada0;
+  --ink-faint: #65635a;
+  --accent: #269C48;
+  --accent-deep: #176332;
+  --accent-warm: #5cc97e;
+  --line: #1f2521;
+  --line-bright: #2e3530;
+
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'Manrope Variable', 'Manrope', system-ui, -apple-system, sans-serif;
+  --mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 400;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(38,156,72,0.10), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 110%, rgba(92,201,126,0.05), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; cursor: pointer; }
+button { cursor: pointer; font: inherit; color: inherit; }
+input, textarea, select { font: inherit; color: inherit; }
+
+.serif { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; }
+.mono { font-family: var(--mono); font-size: 0.78em; letter-spacing: 0.02em; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 2px;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  font-family: inherit;
+}
+.btn-primary { background: var(--accent); color: var(--bg); }
+.btn-primary:hover { background: var(--accent-warm); transform: translateY(-1px); }
+.btn-primary:disabled { background: var(--line-bright); color: var(--ink-faint); cursor: not-allowed; transform: none; }
+.btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line-bright); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.btn-arrow::after { content: '→'; transition: transform 0.2s; }
+.btn-arrow:hover::after { transform: translateX(4px); }
+.btn:focus-visible { outline: 2px solid var(--accent-warm); outline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent-warm); outline-offset: 3px; border-radius: 2px; }
+
+.section-label {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
+  max-width: 800px;
+}
+.section-title em { font-style: italic; color: var(--accent-warm); }
+.section-lede {
+  font-size: 18px;
+  color: var(--ink-dim);
+  max-width: 640px;
+  line-height: 1.6;
+}
+
+section { padding: 100px 0; position: relative; }
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s ease forwards;
+}
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.25s; }
+.delay-3 { animation-delay: 0.4s; }
+.delay-4 { animation-delay: 0.55s; }
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  will-change: opacity, transform;
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0);
+  white-space: nowrap; border: 0;
+}
+
+@media (max-width: 900px) {
+  section { padding: 72px 0; }
+  .container { padding: 0 24px; }
+}

@@ -1,0 +1,291 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RichTitle from '../components/RichTitle.astro';
+import PortfolioShot from '../components/PortfolioShot.astro';
+import site from '../content/site.json';
+import portfolio from '../content/portfolio.json';
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'Portfolio', item: `${site.url}/portfolio` },
+  ],
+};
+
+const allWork = [...portfolio.active.items, ...portfolio.past.items];
+const collectionLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: `Portfolio — ${site.name}`,
+  url: `${site.url}/portfolio`,
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: allWork.map((w, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: w.title,
+      description: w.description,
+    })),
+  },
+};
+
+const hasPast = portfolio.past.items.length > 0;
+---
+
+<BaseLayout
+  title="Portfolio"
+  description="Selected work from FVC Solutions — currently building Foreman Pipeline and Down Bad, plus a sample of past client engagements in custom AI-powered software."
+  pathname="/portfolio"
+  jsonLd={[breadcrumbLd, collectionLd]}
+>
+  <header class="page-head">
+    <div class="container">
+      <div class="breadcrumb fade-up">{portfolio.head.breadcrumb}</div>
+      <h1 class="fade-up delay-1">
+        <RichTitle segments={portfolio.head.title} />
+      </h1>
+      <p class="lede fade-up delay-2">{portfolio.head.lede}</p>
+    </div>
+  </header>
+
+  <section class="work-section">
+    <div class="container">
+      <div class="section-label reveal">{portfolio.active.label}</div>
+      <h2 class="section-title reveal">{portfolio.active.title}</h2>
+      <p class="section-lede reveal">{portfolio.active.lede}</p>
+
+      <div class="work-grid">
+        {portfolio.active.items.map((item) => (
+          <article class="work-item reveal">
+            <PortfolioShot variant={item.shotVariant} />
+            <div class="work-meta">
+              <div class="work-tags">
+                <span class:list={['badge', item.badge.kind]}>{item.badge.label}</span>
+                <span class="sep">/</span>
+                <span>{item.meta}</span>
+              </div>
+              <h3>{item.title}</h3>
+              <div class="work-role">{item.role}</div>
+              <p>{item.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {hasPast && (
+    <section class="work-section">
+      <div class="container">
+        <div class="section-label reveal">{portfolio.past.label}</div>
+        <h2 class="section-title reveal">{portfolio.past.title}</h2>
+        <p class="section-lede reveal">{portfolio.past.lede}</p>
+
+        <div class="work-grid">
+          {portfolio.past.items.map((item, i) => (
+            <article class="work-item reveal">
+              <PortfolioShot variant={item.shotVariant ?? `placeholder${(i % 4) + 1}`} />
+              <div class="work-meta">
+                <div class="work-tags">
+                  <span class:list={['badge', item.badge?.kind ?? 'shipped']}>{item.badge?.label ?? 'Shipped'}</span>
+                  <span class="sep">/</span>
+                  <span>{item.meta}</span>
+                </div>
+                <h3>{item.title}</h3>
+                {item.role && <div class="work-role">{item.role}</div>}
+                <p>{item.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="cta-strip">
+    <div class="container">
+      <h2><RichTitle segments={portfolio.cta.title} /></h2>
+      <p>{portfolio.cta.sub}</p>
+      <a href={portfolio.cta.ctaHref} class="btn btn-primary btn-arrow">{portfolio.cta.ctaLabel}</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-head { padding: 80px 0 64px; }
+  .breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--ink-faint);
+    margin-bottom: 32px;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-family: var(--mono);
+  }
+  .breadcrumb::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .page-head h1 {
+    font-family: var(--serif);
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    max-width: 900px;
+    margin-bottom: 28px;
+    font-weight: 400;
+  }
+  .page-head h1 :global(em) { font-style: italic; color: var(--accent-warm); }
+  .page-head .lede {
+    font-size: 19px;
+    color: var(--ink-dim);
+    max-width: 680px;
+    line-height: 1.6;
+  }
+
+  .work-section {
+    padding: 64px 0;
+    border-top: 1px solid var(--line);
+  }
+  .work-section .section-label {
+    font-size: 11px;
+  }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px 32px;
+    margin-top: 32px;
+  }
+  .work-item {
+    display: flex;
+    flex-direction: column;
+  }
+  .work-item:hover :global(.shot) {
+    border-color: var(--accent-deep);
+    transform: translateY(-2px);
+  }
+
+  .work-meta {
+    padding: 24px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .work-tags {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .work-tags .sep { color: var(--line-bright); }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border: 1px solid;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 2px;
+  }
+  .badge::before {
+    content: '●';
+    font-size: 7px;
+  }
+  .badge.active {
+    color: var(--accent);
+    border-color: var(--accent-deep);
+    background: rgba(38, 156, 72, 0.06);
+  }
+  .badge.active::before { animation: pulse 2s infinite; }
+  .badge.beta {
+    color: #d4a050;
+    border-color: #6b5520;
+    background: rgba(212, 160, 80, 0.05);
+  }
+  .badge.shipped {
+    color: var(--ink-dim);
+    border-color: var(--line-bright);
+  }
+
+  .work-item h3 {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .work-role {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+  .work-item p {
+    color: var(--ink-dim);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 540px;
+  }
+
+  /* CTA STRIP */
+  .cta-strip {
+    padding: 100px 0 120px;
+    text-align: center;
+    border-top: 1px solid var(--line);
+    position: relative;
+  }
+  .cta-strip::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 100% at 50% 50%, rgba(38, 156, 72, 0.06), transparent 70%);
+    pointer-events: none;
+  }
+  .cta-strip h2 {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 400;
+  }
+  .cta-strip h2 :global(em) { font-style: italic; color: var(--accent-warm); }
+  .cta-strip p {
+    color: var(--ink-dim);
+    font-size: 17px;
+    max-width: 520px;
+    margin: 0 auto 36px;
+    line-height: 1.6;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  @media (max-width: 900px) {
+    .work-grid { grid-template-columns: 1fr; gap: 40px; }
+    .page-head { padding: 48px 0 40px; }
+    .work-section { padding: 48px 0; }
+  }
+</style>

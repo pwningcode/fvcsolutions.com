@@ -1,0 +1,27 @@
+{
+  "hero": {
+    "eyebrow": "AI-powered software · Greater Columbus, Ohio",
+    "title": [
+      { "text": "We build custom software " },
+      { "text": "that uses AI well.", "italic": true }
+    ],
+    "sub": "A small, experienced team designing and shipping AI-powered applications for small businesses. Fixed-scope engagements. No retainers. No maintenance contracts.",
+    "primaryCta": { "label": "Schedule a call", "href": "/schedule" },
+    "secondaryCta": { "label": "See what we build", "href": "/portfolio" },
+    "meta": [
+      { "label": "Est. 2012", "sub": "Greater Columbus, OH" },
+      { "label": "2 principals", "sub": "No subcontractors" },
+      { "label": "$5k — $30k", "sub": "Typical project range" },
+      { "label": "3—8 weeks", "sub": "Typical delivery" }
+    ]
+  },
+  "finalCta": {
+    "title": [
+      { "text": "Have a project in mind? " },
+      { "text": "Tell us about it.", "italic": true }
+    ],
+    "sub": "A 30-minute call, no pitch, no pressure. We'll review your answers in advance so we can use the time well.",
+    "cta": { "label": "Schedule a call", "href": "/schedule" },
+    "footnote": "We don't collect contact info for marketing or sale."
+  }
+}

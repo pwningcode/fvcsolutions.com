@@ -1,0 +1,23 @@
+{
+  "label": "04 · Who we are",
+  "title": [
+    { "text": "A team of two. " },
+    { "text": "On purpose.", "italic": true }
+  ],
+  "members": [
+    {
+      "initial": "J",
+      "name": "Jason Barnes",
+      "role": "Engineering · Applications",
+      "bio": "Fifteen-plus years building software. Focused on AI-powered applications and the infrastructure that keeps them working in production. Writes the code. Designs the systems.",
+      "linkedin": "https://www.linkedin.com/in/pwningcode"
+    },
+    {
+      "initial": "T",
+      "name": "Tom Jarrell",
+      "role": "Operations · Requirements",
+      "bio": "Translates business problems into technical ones. Runs discovery, manages scope, keeps projects on the rails. The reason our clients know what they're getting before we start.",
+      "linkedin": "https://www.linkedin.com/in/tom-jarrell-6241796"
+    }
+  ]
+}

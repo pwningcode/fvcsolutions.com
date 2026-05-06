@@ -1,0 +1,15 @@
+---
+type Segment = { text: string; italic?: boolean };
+
+interface Props {
+  segments: Segment[];
+}
+
+const { segments } = Astro.props;
+---
+
+<>
+  {segments.map((seg) =>
+    seg.italic ? <em>{seg.text}</em> : <Fragment>{seg.text}</Fragment>
+  )}
+</>

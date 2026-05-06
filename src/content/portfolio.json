@@ -1,0 +1,50 @@
+{
+  "head": {
+    "breadcrumb": "Selected work · 2012 — present",
+    "title": [
+      { "text": "A few of the things " },
+      { "text": "we've shipped.", "italic": true }
+    ],
+    "lede": "Two projects we're actively building, plus a sample of past client work. Twenty years' worth of code doesn't fit on one page — what's here is what we think is most relevant to the work we're focused on now."
+  },
+  "active": {
+    "label": "01 · Currently building",
+    "title": "In active development.",
+    "lede": "Internal projects we use to inform how we work — and one product we plan to ship.",
+    "items": [
+      {
+        "id": "foreman",
+        "shotVariant": "foreman",
+        "badge": { "kind": "active", "label": "In Development" },
+        "meta": "Internal · 2025–present",
+        "title": "Foreman Pipeline",
+        "role": "AI orchestration · workflow tooling",
+        "description": "An AI-agent harness with remote control. Custom workflows orchestrate work through an AI coding agent running locally or in a sandbox. We use it daily — it's part of why we can ship custom applications faster than firms our size usually can."
+      },
+      {
+        "id": "downbad",
+        "shotVariant": "downbad",
+        "badge": { "kind": "beta", "label": "Beta soon" },
+        "meta": "Product · 2026",
+        "title": "Down Bad",
+        "role": "SaaS · uptime monitoring",
+        "description": "24/7 uptime monitoring with more features than the established tools, at a flat $50 a year — not per monitor, not per site. Built because we wanted better monitoring for our own infrastructure than the market was offering."
+      }
+    ]
+  },
+  "past": {
+    "label": "02 · Selected past work",
+    "title": "Client engagements.",
+    "lede": "A sample of what we've built for businesses over the years. Some are anonymized; in most cases the work was internal and not public-facing.",
+    "items": []
+  },
+  "cta": {
+    "title": [
+      { "text": "Got a project that " },
+      { "text": "looks like one of these?", "italic": true }
+    ],
+    "sub": "Tell us about it. A 30-minute call, no pitch, no pressure.",
+    "ctaLabel": "Schedule a call",
+    "ctaHref": "/schedule"
+  }
+}

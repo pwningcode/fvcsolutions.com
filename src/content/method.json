@@ -1,0 +1,26 @@
+{
+  "label": "02 · How we work",
+  "title": [
+    { "text": "The difference is in the " },
+    { "text": "engineering discipline.", "italic": true }
+  ],
+  "lede": "Most AI projects fail not because the model can't do the job, but because the surrounding system isn't built for it. We spend our time on that surrounding system.",
+  "items": [
+    {
+      "title": "We scope narrow and ship fast",
+      "description": "Fixed scope, fixed price, clear deliverable. If we can't describe the finished product in a paragraph, we won't start. Most engagements run 3 to 8 weeks."
+    },
+    {
+      "title": "We build evaluations before features",
+      "description": "How do we know the AI is doing its job? We write tests that measure real accuracy on your data before we write the feature. \"Looks good in the demo\" isn't a standard we ship against."
+    },
+    {
+      "title": "We design for the failure modes",
+      "description": "Every AI system gets things wrong. The question is what happens when it does. Graceful fallbacks, human review queues, and audit trails are part of the build — not an afterthought."
+    },
+    {
+      "title": "We hand off cleanly",
+      "description": "You get the code, the documentation, and a walkthrough. No lock-in, no surprise invoices. If you want us to extend it later, great. If not, you own every line."
+    }
+  ]
+}

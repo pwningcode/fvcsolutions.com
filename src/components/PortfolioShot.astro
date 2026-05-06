@@ -1,0 +1,162 @@
+---
+interface Props {
+  variant: string;
+}
+
+const { variant } = Astro.props;
+---
+
+<div class:list={['shot', `shot-${variant}`]} aria-hidden="true">
+  <div class="shot-inner">
+    {variant === 'foreman' && (
+      <>
+        <div class="pipe p1"></div>
+        <div class="pipe p2"></div>
+        <div class="pipe p3"></div>
+        <div class="pipe p4"></div>
+        <div class="pipe p1"></div>
+      </>
+    )}
+    {variant === 'downbad' && (
+      <>
+        <div class="row"><span class="dot"></span><span>api.example.com</span><div class="bar"></div><span class="ms">142ms</span></div>
+        <div class="row"><span class="dot"></span><span>checkout.shop.io</span><div class="bar"></div><span class="ms">89ms</span></div>
+        <div class="row"><span class="dot warn"></span><span>cdn.assets.net</span><div class="bar"></div><span class="ms">2.4s</span></div>
+        <div class="row"><span class="dot"></span><span>auth.service.dev</span><div class="bar"></div><span class="ms">61ms</span></div>
+        <div class="row"><span class="dot"></span><span>db.primary.local</span><div class="bar"></div><span class="ms">12ms</span></div>
+        <div class="row"><span class="dot cold"></span><span>staging.app.io</span><div class="bar"></div><span class="ms">—</span></div>
+      </>
+    )}
+    {variant.startsWith('placeholder') && (
+      <span class="ph-text">Project screenshot</span>
+    )}
+  </div>
+</div>
+
+<style>
+  .shot {
+    aspect-ratio: 4 / 3;
+    background: var(--bg-2);
+    border: 1px solid var(--line-bright);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    transition: border-color 0.2s, transform 0.3s ease;
+  }
+  .shot::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 22px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    z-index: 2;
+  }
+  .shot::after {
+    content: '';
+    position: absolute;
+    top: 7px; left: 10px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--line-bright);
+    box-shadow: 14px 0 0 var(--line-bright), 28px 0 0 var(--line-bright);
+    z-index: 3;
+  }
+  .shot-inner {
+    position: absolute;
+    inset: 22px 0 0 0;
+    display: flex;
+    overflow: hidden;
+  }
+
+  .shot-foreman .shot-inner {
+    background: linear-gradient(135deg, #0f1410 0%, #131815 100%);
+    flex-direction: column;
+  }
+  .shot-foreman .shot-inner::before {
+    content: 'FOREMAN  ›  pipelines  ›  active';
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--accent-warm);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    letter-spacing: 0.1em;
+  }
+  .pipe {
+    height: 18px;
+    margin: 6px 14px;
+    background: var(--bg);
+    border-left: 2px solid var(--accent);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+  .pipe::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; height: 100%;
+    background: linear-gradient(90deg, rgba(38,156,72,0.4), rgba(38,156,72,0.05));
+  }
+  .pipe.p1::before { width: 80%; }
+  .pipe.p2::before { width: 45%; }
+  .pipe.p3::before {
+    width: 95%;
+    background: linear-gradient(90deg, rgba(92,201,126,0.5), rgba(92,201,126,0.05));
+  }
+  .pipe.p4::before { width: 30%; }
+
+  .shot-downbad .shot-inner {
+    background: #0a0c0a;
+    padding: 16px;
+    gap: 8px;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .row {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-dim);
+    letter-spacing: 0.05em;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  .dot.warn { background: #d4a050; box-shadow: 0 0 8px #d4a050; }
+  .dot.cold { background: var(--line-bright); box-shadow: none; animation: none; }
+  .bar {
+    flex: 1; height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity: 0.4;
+  }
+  .ms { color: var(--ink-faint); }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .shot-placeholder1 .shot-inner { background: linear-gradient(135deg, #131815 0%, #0e110f 100%); }
+  .shot-placeholder2 .shot-inner { background: linear-gradient(135deg, #131613 0%, #161a16 100%); }
+  .shot-placeholder3 .shot-inner { background: linear-gradient(160deg, #14181a 0%, #0c0e0d 100%); }
+  .shot-placeholder4 .shot-inner { background: linear-gradient(120deg, #11140f 0%, #14171a 100%); }
+  .shot-placeholder1 .shot-inner,
+  .shot-placeholder2 .shot-inner,
+  .shot-placeholder3 .shot-inner,
+  .shot-placeholder4 .shot-inner {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    color: var(--ink-faint);
+  }
+  .ph-text {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+</style>

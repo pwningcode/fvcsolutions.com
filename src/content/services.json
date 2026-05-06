@@ -1,0 +1,54 @@
+{
+  "label": "01 · What we build",
+  "title": [
+    { "text": "Software that would've been impossible to build for your budget " },
+    { "text": "a year ago.", "italic": true }
+  ],
+  "lede": "Most small businesses don't need another SaaS subscription. They need one well-built internal tool. AI changes what one well-built tool can do.",
+  "items": [
+    {
+      "id": "custom-tools",
+      "tag": "01 / CUSTOM TOOLS",
+      "title": "Internal apps that replace spreadsheets, manual work, and duct tape",
+      "description": "The dashboards, intake forms, approval workflows, and reporting tools your team actually needs. Built around your process, not a vendor's template.",
+      "bullets": [
+        "Intake & triage systems",
+        "Workflow & approval tooling",
+        "Internal dashboards and reporting"
+      ]
+    },
+    {
+      "id": "document-intelligence",
+      "tag": "02 / DOCUMENT INTELLIGENCE",
+      "title": "Turn PDFs, emails, and contracts into structured data you can query",
+      "description": "Extraction and summarization pipelines that read your documents and pull out what matters. For firms drowning in unstructured paperwork.",
+      "bullets": [
+        "Contract & invoice extraction",
+        "Email classification & routing",
+        "Knowledge base Q&A over your docs"
+      ]
+    },
+    {
+      "id": "customer-facing-ai",
+      "tag": "03 / CUSTOMER-FACING AI",
+      "title": "Assistants, bots, and tools that answer on your behalf — accurately",
+      "description": "Client-facing AI features that cite your sources and stay in their lane. We build the guardrails most vendors skip.",
+      "bullets": [
+        "Support assistants grounded in your docs",
+        "Quoting & product-finder tools",
+        "Intake bots with human handoff"
+      ]
+    },
+    {
+      "id": "process-automation",
+      "tag": "04 / PROCESS AUTOMATION",
+      "title": "The boring-but-valuable automations that pay for themselves",
+      "description": "The kind of work that shouldn't require a full-time employee anymore. Connecting your existing tools and letting AI handle the judgment calls.",
+      "bullets": [
+        "Inbox triage & response drafting",
+        "Report generation from raw data",
+        "Multi-system sync with AI in the loop"
+      ]
+    }
+  ]
+}

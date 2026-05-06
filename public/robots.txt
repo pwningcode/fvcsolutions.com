@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fvcsolutions.com/sitemap-index.xml

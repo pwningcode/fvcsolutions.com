@@ -1,0 +1,527 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RichTitle from '../components/RichTitle.astro';
+import site from '../content/site.json';
+import home from '../content/home.json';
+import services from '../content/services.json';
+import method from '../content/method.json';
+import engagement from '../content/engagement.json';
+import team from '../content/team.json';
+
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': `${site.url}/#org`,
+  name: site.name,
+  legalName: site.legalName,
+  url: site.url,
+  description: site.description,
+  foundingDate: site.founded,
+  areaServed: 'United States',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: site.location.city,
+    addressRegion: site.location.regionCode,
+    addressCountry: site.location.countryCode,
+  },
+  sameAs: site.social.map((s) => s.url),
+  knowsAbout: [
+    'Artificial intelligence',
+    'AI-powered applications',
+    'Custom software development',
+    'Document intelligence',
+    'Process automation',
+  ],
+  makesOffer: engagement.items.map((it) => ({
+    '@type': 'Offer',
+    name: it.name,
+    description: it.description,
+    category: it.tag,
+  })),
+  founder: team.members.map((m) => ({
+    '@type': 'Person',
+    name: m.name,
+    jobTitle: m.role,
+    sameAs: m.linkedin ? [m.linkedin] : undefined,
+  })),
+};
+
+const websiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${site.url}/#website`,
+  url: site.url,
+  name: site.name,
+  description: site.description,
+  publisher: { '@id': `${site.url}/#org` },
+  inLanguage: 'en-US',
+};
+
+// FAQ schema for AEO — generated from method + engagement
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What does FVC Solutions build?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Custom AI-powered applications for small businesses: internal tools, document intelligence pipelines, customer-facing AI assistants, and process automation. Fixed-scope engagements typically run 3 to 8 weeks.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much do projects cost?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Discovery and Review engagements start at $5,000. A typical Build engagement is $15,000 to $30,000. Larger or multi-phase work is priced individually.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do you ensure AI features actually work?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'We write evaluations before features — automated tests that measure real accuracy on the client\'s data. We also design for AI failure modes from the start: graceful fallbacks, human review queues, and audit trails are part of the build.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do you require retainers or maintenance contracts?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. Engagements are fixed-scope and fixed-price. Clients receive full source code and documentation at hand-off, with no lock-in.',
+      },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={`${site.name} — ${site.shortDescription}`}
+  description={site.description}
+  pathname="/"
+  jsonLd={[orgLd, websiteLd, faqLd]}
+>
+  <header class="hero">
+    <div class="container">
+      <div class="hero-eyebrow fade-up">{home.hero.eyebrow}</div>
+      <h1 class="fade-up delay-1">
+        <RichTitle segments={home.hero.title} />
+      </h1>
+      <p class="hero-sub fade-up delay-2">{home.hero.sub}</p>
+      <div class="hero-cta fade-up delay-3">
+        <a href={home.hero.primaryCta.href} class="btn btn-primary btn-arrow">{home.hero.primaryCta.label}</a>
+        <a href={home.hero.secondaryCta.href} class="btn btn-ghost">{home.hero.secondaryCta.label}</a>
+      </div>
+      <div class="hero-meta fade-up delay-4">
+        {home.hero.meta.map((m) => (
+          <div><strong>{m.label}</strong>{m.sub}</div>
+        ))}
+      </div>
+    </div>
+  </header>
+
+  <section id="build" class="build">
+    <div class="container">
+      <div class="section-label reveal">{services.label}</div>
+      <h2 class="section-title reveal"><RichTitle segments={services.title} /></h2>
+      <p class="section-lede reveal">{services.lede}</p>
+
+      <div class="build-grid">
+        {services.items.map((item) => (
+          <div class="build-card reveal">
+            <div class="build-num">{item.tag}</div>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+            <ul>
+              {item.bullets.map((b) => <li>{b}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="method" class="method">
+    <div class="container">
+      <div>
+        <div class="section-label reveal">{method.label}</div>
+        <h2 class="section-title reveal"><RichTitle segments={method.title} /></h2>
+        <p class="section-lede reveal">{method.lede}</p>
+      </div>
+      <ol class="method-list">
+        {method.items.map((item) => (
+          <li class="method-item reveal">
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section id="engagement" class="engagement">
+    <div class="container">
+      <div class="section-label reveal">{engagement.label}</div>
+      <h2 class="section-title reveal">{engagement.title}</h2>
+      <p class="section-lede reveal">{engagement.lede}</p>
+
+      <div class="eng-grid">
+        {engagement.items.map((item) => (
+          <article class:list={['eng-card reveal', { featured: item.featured }]}>
+            <div class="eng-tag">{item.tag}</div>
+            <h3>{item.name}</h3>
+            <div class="eng-price">{item.price}</div>
+            <p>{item.description}</p>
+            <ul>
+              {item.features.map((f) => <li>{f}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="team">
+    <div class="container">
+      <div>
+        <div class="section-label reveal">{team.label}</div>
+        <h2 class="section-title reveal"><RichTitle segments={team.title} /></h2>
+      </div>
+      {team.members.map((m, i) => (
+        <>
+          <article class="team-card reveal">
+            <div class="team-initial" aria-hidden="true">{m.initial}</div>
+            <h3>{m.name}</h3>
+            <div class="team-role">{m.role}</div>
+            <p>{m.bio}</p>
+          </article>
+          {i === 0 && <div class="team-spacer" aria-hidden="true"></div>}
+        </>
+      ))}
+    </div>
+  </section>
+
+  <section id="contact" class="final-cta">
+    <div class="container">
+      <h2><RichTitle segments={home.finalCta.title} /></h2>
+      <p>{home.finalCta.sub}</p>
+      <div class="hero-cta center">
+        <a href={home.finalCta.cta.href} class="btn btn-primary btn-arrow">{home.finalCta.cta.label}</a>
+      </div>
+      <p class="footnote">{home.finalCta.footnote}</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* HERO */
+  .hero { padding: 120px 0 140px; position: relative; }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--ink-dim);
+    margin-bottom: 36px;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-family: var(--mono);
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(48px, 7vw, 92px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    max-width: 900px;
+    margin-bottom: 36px;
+    font-weight: 400;
+  }
+  .hero h1 :global(em) { font-style: italic; color: var(--accent-warm); }
+  .hero-sub {
+    font-size: 20px;
+    color: var(--ink-dim);
+    max-width: 580px;
+    line-height: 1.55;
+    margin-bottom: 48px;
+  }
+  .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+  .hero-cta.center { justify-content: center; }
+  .hero-meta {
+    display: flex;
+    gap: 48px;
+    margin-top: 80px;
+    padding-top: 36px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+  }
+  .hero-meta strong {
+    color: var(--ink);
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  /* WHAT WE BUILD */
+  .build {
+    border-top: 1px solid var(--line);
+    background: linear-gradient(180deg, transparent, rgba(23, 19, 16, 0.4));
+  }
+  .build-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    margin-top: 72px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .build-card {
+    background: var(--bg);
+    padding: 44px 40px;
+    transition: background 0.3s;
+    position: relative;
+  }
+  .build-card:hover { background: var(--bg-2); }
+  .build-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 24px;
+    letter-spacing: 0.15em;
+  }
+  .build-card h3 {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+  .build-card p {
+    color: var(--ink-dim);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .build-card ul {
+    list-style: none;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+  }
+  .build-card li {
+    padding: 6px 0;
+    border-top: 1px dashed var(--line);
+  }
+  .build-card li::before { content: '— '; color: var(--accent); }
+
+  /* METHOD */
+  .method :global(.container) {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 100px;
+    align-items: start;
+  }
+  .method-list {
+    display: flex;
+    flex-direction: column;
+    counter-reset: method;
+    margin-top: 20px;
+    list-style: none;
+  }
+  .method-item {
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+    counter-increment: method;
+    position: relative;
+    padding-left: 64px;
+  }
+  .method-item:last-child { border-bottom: 1px solid var(--line); }
+  .method-item::before {
+    content: counter(method, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 34px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+  .method-item h3 {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+  }
+  .method-item p {
+    color: var(--ink-dim);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* ENGAGEMENT */
+  .engagement {
+    background: var(--bg-2);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .eng-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 64px;
+  }
+  .eng-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    padding: 40px 32px;
+    position: relative;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .eng-card:hover { transform: translateY(-4px); border-color: var(--line-bright); }
+  .eng-card.featured {
+    border-color: var(--accent);
+    background: linear-gradient(180deg, rgba(38, 156, 72, 0.05), transparent);
+  }
+  .eng-card.featured:hover { border-color: var(--accent-warm); }
+  .eng-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 16px;
+  }
+  .eng-card.featured .eng-tag { color: var(--accent); }
+  .eng-card h3 {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+  .eng-price {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .eng-card p {
+    color: var(--ink-dim);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .eng-card ul {
+    list-style: none;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .eng-card li {
+    padding: 8px 0;
+    padding-left: 22px;
+    position: relative;
+    border-top: 1px solid var(--line);
+  }
+  .eng-card li::before {
+    content: '+';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: var(--mono);
+  }
+
+  /* TEAM */
+  .team :global(.container) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+  }
+  .team-card {
+    padding: 40px 0;
+    border-top: 1px solid var(--line-bright);
+  }
+  .team-initial {
+    font-family: var(--serif);
+    font-size: 64px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .team-card h3 {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+  .team-role {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .team-card p {
+    color: var(--ink-dim);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* CTA */
+  .final-cta { padding: 140px 0; text-align: center; position: relative; }
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 100% at 50% 50%, rgba(38, 156, 72, 0.08), transparent 70%);
+    pointer-events: none;
+  }
+  .final-cta h2 {
+    font-family: var(--serif);
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 400;
+  }
+  .final-cta h2 :global(em) { font-style: italic; color: var(--accent-warm); }
+  .final-cta p {
+    color: var(--ink-dim);
+    font-size: 18px;
+    max-width: 520px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+  }
+  .final-cta .footnote {
+    margin-top: 32px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) {
+    .method :global(.container) { grid-template-columns: 1fr; gap: 48px; }
+    .build-grid { grid-template-columns: 1fr; }
+    .eng-grid { grid-template-columns: 1fr; }
+    .team :global(.container) { grid-template-columns: 1fr; }
+    .team-spacer { display: none; }
+    .hero-meta { flex-direction: column; gap: 24px; }
+    .hero { padding: 80px 0 100px; }
+  }
+</style>

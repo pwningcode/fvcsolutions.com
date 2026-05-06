@@ -1,0 +1,39 @@
+{
+  "name": "FVC Solutions",
+  "legalName": "Future Vision Concepts, LLC",
+  "wordmark": { "highlight": "fvc", "rest": "solutions" },
+  "tagline": "Future Vision Concepts",
+  "domain": "fvcsolutions.com",
+  "url": "https://fvcsolutions.com",
+  "location": {
+    "city": "Greater Columbus",
+    "region": "Ohio",
+    "regionCode": "OH",
+    "country": "United States",
+    "countryCode": "US"
+  },
+  "founded": "2012",
+  "description": "AI-powered software for small business. A small, experienced team designing and shipping AI-powered applications. Fixed-scope engagements. No retainers. No maintenance contracts.",
+  "shortDescription": "AI-powered software for small business",
+  "calendly": {
+    "url": "https://calendly.com/fvcsolutions/introduction",
+    "questionMap": {
+      "kind": "a1",
+      "problem": "a2",
+      "budget": "a3",
+      "timeline": "a4",
+      "company": "a5",
+      "size": "a6",
+      "source": "a7"
+    }
+  },
+  "social": [
+    { "label": "Tom", "url": "https://www.linkedin.com/in/tom-jarrell-6241796", "type": "linkedin" },
+    { "label": "Jason", "url": "https://www.linkedin.com/in/pwningcode", "type": "linkedin" }
+  ],
+  "nav": [
+    { "label": "What we build", "href": "/#build" },
+    { "label": "How we work", "href": "/#method" },
+    { "label": "Portfolio", "href": "/portfolio" }
+  ]
+}

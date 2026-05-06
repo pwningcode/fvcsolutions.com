@@ -1,0 +1,70 @@
+---
+import site from '../content/site.json';
+
+interface Props {
+  href?: string;
+  ariaLabel?: string;
+}
+
+const { href = '/', ariaLabel = `${site.name} — home` } = Astro.props;
+---
+
+<a href={href} class="logo" aria-label={ariaLabel}>
+  <svg class="logo-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+    <g stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <g class="l-fill">
+        <path d="M31.9,2.2v20.5h0.2L59,32.3l0,20.1V11.6C59,11.6,45.5,6.9,31.9,2.2C31.9,2.2,31.8,2.2,31.9,2.2L5.1,12.3" />
+        <polyline points="5.1,32.5 31.9,42 31.9,42.1 31.9,62.1 31.9,62.2 5.1,52.8 5.1,12.5" />
+      </g>
+      <g class="l-stroke">
+        <line x1="59" y1="52.4" x2="31.9" y2="62.2" />
+        <line x1="31.9" y1="42" x2="58.9" y2="32.3" />
+        <line x1="5.1" y1="32.5" x2="31.9" y2="22.7" />
+      </g>
+    </g>
+  </svg>
+  <span class="logo-wordmark">
+    <span class="logo-name"><span>{site.wordmark.highlight}</span>{site.wordmark.rest}</span>
+    <span class="logo-text">{site.tagline}</span>
+  </span>
+</a>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .logo-svg {
+    width: 34px;
+    height: 34px;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  .logo:hover .logo-svg { transform: rotate(-8deg) scale(1.05); }
+  .logo-svg .l-fill { fill: var(--accent); stroke: var(--accent-deep); }
+  .logo-svg .l-stroke { fill: none; stroke: var(--accent-deep); }
+  .logo-wordmark {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+  .logo-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .logo-name span { color: var(--accent); }
+  .logo-text {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-faint);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+</style>

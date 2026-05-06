@@ -1,0 +1,114 @@
+{
+  "head": {
+    "breadcrumb": "Step 1 of 2 · Tell us about your project",
+    "title": [
+      { "text": "A few quick questions, " },
+      { "text": "then we'll book a time.", "italic": true }
+    ],
+    "lede": "We read your answers before the call, so the time gets spent on your problem instead of intake. Should take about two minutes."
+  },
+  "trustBanner": {
+    "heading": "What we collect, and don't",
+    "body": "**This form does not ask for an email or phone number.** The questions below help us understand your project — that's all. Your answers come to us through our scheduling tool only after you book a time.",
+    "nuance": "Heads up: the booking step uses Calendly, which needs your name and email to send the calendar invite. That's between you and Calendly — we don't store, sell, or use your email for marketing. No newsletter, no follow-up sequence, no list. If we don't end up working together, we move on."
+  },
+  "how": {
+    "label": "How this works",
+    "steps": [
+      {
+        "num": "01",
+        "title": "Tell us about the project",
+        "body": "The form below — about two minutes. We use it to figure out if we're a fit before either of us spends time on a call."
+      },
+      {
+        "num": "02",
+        "title": "Book a 30-minute call",
+        "body": "You'll land on our scheduling page next. Pick any time that works. We'll confirm by email through Calendly."
+      },
+      {
+        "num": "03",
+        "title": "Hear back, either way",
+        "body": "If we're a fit, we'll send a written proposal within a few days. If we're not, we'll tell you on the call and point you somewhere better."
+      }
+    ]
+  },
+  "form": {
+    "label": "02 · Project details",
+    "title": "The questions.",
+    "submitLabel": "Continue to scheduling",
+    "submitNote": "**Next:** you'll be sent to our Calendly page where you can pick a time. Your answers above will travel with you so we have them when we meet.",
+    "questions": [
+      {
+        "id": "kind",
+        "num": "Q1",
+        "type": "radio",
+        "label": "What kind of engagement are you looking for?",
+        "help": "Pick the closest fit. We can adjust on the call.",
+        "required": true,
+        "options": [
+          { "value": "Build a custom AI-powered application", "title": "Build something", "sub": "A custom AI-powered application or internal tool" },
+          { "value": "Discovery & strategy", "title": "Discovery", "sub": "Figure out where AI fits in your business, and what to build first" },
+          { "value": "Review of existing AI work", "title": "Review", "sub": "A second pair of eyes on something you (or another team) built" },
+          { "value": "Not sure yet", "title": "Not sure yet", "sub": "Help me figure out what I need" }
+        ]
+      },
+      {
+        "id": "problem",
+        "num": "Q2",
+        "type": "textarea",
+        "label": "What are you trying to solve, or trying to build?",
+        "help": "A few sentences is plenty. The clearer this is, the better we can prepare.",
+        "required": true,
+        "placeholder": "e.g., Our team manually processes about 200 vendor invoices a week. We want to extract line-item data automatically and flag anything unusual for review..."
+      },
+      {
+        "id": "budget",
+        "num": "Q3",
+        "type": "radio",
+        "label": "What's your rough budget?",
+        "help": "Honest answer is best. Helps us suggest a realistic shape for the work.",
+        "required": true,
+        "options": [
+          { "value": "$5,000 (Discovery or Review)", "title": "~$5,000", "sub": "Discovery or Review engagement" },
+          { "value": "$15,000 - $30,000 (Build)", "title": "$15,000 — $30,000", "sub": "A typical Build engagement" },
+          { "value": "Larger / more complex", "title": "Larger / more complex", "sub": "$30,000+ or multi-phase" },
+          { "value": "Not sure / want to discuss", "title": "Not sure", "sub": "Want to discuss on the call" }
+        ]
+      },
+      {
+        "id": "timeline",
+        "num": "Q4",
+        "type": "radio",
+        "compact": true,
+        "label": "What's the timeline?",
+        "required": true,
+        "options": [
+          { "value": "ASAP / urgent", "title": "ASAP", "sub": "There's a deadline" },
+          { "value": "1–3 months", "title": "1–3 months", "sub": "Want to start soon" },
+          { "value": "Exploring / no rush", "title": "Exploring", "sub": "No specific timeline" }
+        ]
+      },
+      {
+        "id": "company-block",
+        "num": "Q5",
+        "type": "two-col",
+        "label": "About your company",
+        "optional": true,
+        "help": "Skip if you'd rather share on the call.",
+        "fields": [
+          { "id": "company", "label": "Company name", "placeholder": "Acme Co." },
+          { "id": "size", "label": "Team size", "placeholder": "e.g., 15 people" }
+        ]
+      },
+      {
+        "id": "source",
+        "num": "Q6",
+        "type": "text",
+        "label": "How did you hear about us?",
+        "optional": true,
+        "help": "Helps us figure out what's actually working.",
+        "placeholder": "Referral from..., LinkedIn, search, etc."
+      }
+    ]
+  }
+}

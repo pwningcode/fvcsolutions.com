@@ -1,0 +1,69 @@
+---
+import Logo from './Logo.astro';
+import site from '../content/site.json';
+
+interface Props {
+  active?: string;
+}
+
+const { active } = Astro.props;
+const isActive = (href: string): boolean => {
+  if (!active) return false;
+  if (href === active) return true;
+  if (href.startsWith('/#') && active === '/') return false;
+  return false;
+};
+---
+
+<nav aria-label="Primary">
+  <div class="container">
+    <Logo />
+    <div class="nav-links">
+      {site.nav.map((item) => (
+        <a href={item.href} class:list={[{ active: isActive(item.href) }]}>{item.label}</a>
+      ))}
+      <a
+        href="/schedule"
+        class:list={['btn', 'btn-primary', 'btn-arrow', { active: active === '/schedule' }]}
+      >Schedule a call</a>
+    </div>
+  </div>
+</nav>
+
+<style>
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 20px 0;
+    background: rgba(13, 15, 13, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    align-items: center;
+  }
+  .nav-links a {
+    color: var(--ink-dim);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--accent); }
+  .nav-links a.btn.active { color: var(--bg); }
+
+  @media (max-width: 900px) {
+    .nav-links a:not(.btn) { display: none; }
+    .nav-links { gap: 20px; }
+  }
+</style>

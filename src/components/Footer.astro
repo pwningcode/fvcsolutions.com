@@ -1,0 +1,56 @@
+---
+import site from '../content/site.json';
+
+const links = [
+  { label: 'Home', href: '/' },
+  { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Schedule a call', href: '/schedule' },
+  ...site.social.map((s) => ({ label: s.label, href: s.url })),
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <div class="container">
+    <div>{site.name.toUpperCase()} · {site.legalName} · {site.location.city}, {site.location.regionCode} · &copy; {year}</div>
+    <div class="links">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    padding: 60px 0 40px;
+    border-top: 1px solid var(--line);
+    background: var(--bg-2);
+    position: relative;
+    z-index: 1;
+  }
+  footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.05em;
+  }
+  .links a {
+    color: var(--ink-dim);
+    text-decoration: none;
+    margin-left: 20px;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .links a:first-child { margin-left: 0; }
+  .links a:hover { color: var(--accent); }
+
+  @media (max-width: 700px) {
+    footer .container { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .links a { margin-left: 0; margin-right: 16px; }
+  }
+</style>
