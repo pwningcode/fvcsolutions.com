@@ -117,6 +117,52 @@ const hasPast = portfolio.past.items.length > 0;
       <a href={portfolio.cta.ctaHref} class="btn btn-primary btn-arrow">{portfolio.cta.ctaLabel}</a>
     </div>
   </section>
+
+  <dialog id="zoom-dialog" class="zoom-dialog" aria-label="Zoomed portfolio image">
+    <button type="button" class="zoom-close" aria-label="Close zoomed image">&times;</button>
+    <img id="zoom-image" alt="" />
+  </dialog>
+
+  <script>
+    const dialog = document.getElementById('zoom-dialog') as HTMLDialogElement | null;
+    const image = document.getElementById('zoom-image') as HTMLImageElement | null;
+    const closeBtn = dialog?.querySelector('.zoom-close') as HTMLButtonElement | null;
+
+    if (dialog && image) {
+      const open = (src: string, alt: string) => {
+        image.src = src;
+        image.alt = alt;
+        dialog.showModal();
+      };
+      const close = () => {
+        if (dialog.open) dialog.close();
+      };
+
+      document.querySelectorAll<HTMLElement>('.shot[data-zoomable]').forEach((el) => {
+        const handler = () => {
+          const src = el.dataset.zoomSrc;
+          const alt = el.dataset.zoomAlt ?? '';
+          if (src) open(src, alt);
+        };
+        el.addEventListener('click', handler);
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handler();
+          }
+        });
+      });
+
+      closeBtn?.addEventListener('click', close);
+      image.addEventListener('click', close);
+      dialog.addEventListener('click', (e) => {
+        if (e.target === dialog) close();
+      });
+      dialog.addEventListener('close', () => {
+        image.removeAttribute('src');
+      });
+    }
+  </script>
 </BaseLayout>
 
 <style>
@@ -293,5 +339,56 @@ const hasPast = portfolio.past.items.length > 0;
     .work-grid { grid-template-columns: 1fr; gap: 40px; }
     .page-head { padding: 48px 0 40px; }
     .work-section { padding: 48px 0; }
+  }
+
+  .zoom-dialog {
+    border: none;
+    padding: 0;
+    background: transparent;
+    max-width: 100vw;
+    max-height: 100vh;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .zoom-dialog::backdrop {
+    background: rgba(8, 10, 9, 0.92);
+    backdrop-filter: blur(4px);
+  }
+  .zoom-dialog[open] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .zoom-dialog img {
+    max-width: min(96vw, 1600px);
+    max-height: 92vh;
+    object-fit: contain;
+    border: 1px solid var(--line-bright);
+    border-radius: 4px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    cursor: zoom-out;
+  }
+  .zoom-close {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    width: 40px;
+    height: 40px;
+    background: var(--bg);
+    color: var(--ink);
+    border: 1px solid var(--line-bright);
+    border-radius: 50%;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .zoom-close:hover {
+    border-color: var(--accent);
+    color: var(--accent);
   }
 </style>

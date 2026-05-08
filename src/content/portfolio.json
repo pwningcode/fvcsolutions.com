@@ -14,7 +14,11 @@
     "items": [
       {
         "id": "foreman",
-        "shotVariant": "foreman",
+        "image": {
+          "src": "/images/portfolio/foreman.webp",
+          "alt": "Foreman Run task workspace with a queue of in-flight runs, a code diff under review, and a structured plan of goal, steps, and verification",
+          "eager": true
+        },
         "badge": { "kind": "active", "label": "In Development" },
         "meta": "Internal · 2026",
         "title": "Foreman Run",
@@ -23,7 +27,11 @@
       },
       {
         "id": "downbad",
-        "shotVariant": "downbad",
+        "image": {
+          "src": "/images/portfolio/downbad.webp",
+          "alt": "Down Bad notification profiles dashboard listing uptime, quiet-hours digest, and dev sandbox profiles with their delivery channels",
+          "eager": true
+        },
         "badge": { "kind": "beta", "label": "Beta soon" },
         "meta": "Product · 2026",
         "title": "Down Bad",
@@ -36,7 +44,32 @@
     "label": "02 · Selected past work",
     "title": "Client engagements.",
     "lede": "A sample of what we've built for businesses over the years. Some are anonymized; in most cases the work was internal and not public-facing.",
-    "items": []
+    "items": [
+      {
+        "id": "rlinc",
+        "image": {
+          "src": "/images/portfolio/rlinc.webp",
+          "alt": "rLinc AI Assistant analytics dashboard with question and user counts, success rate, response time, cost, feedback metrics, and usage and cost time-series charts"
+        },
+        "badge": { "kind": "shipped", "label": "Shipped" },
+        "meta": "Internal · 2026",
+        "title": "rLinc",
+        "role": "Internal operations · AI assistant",
+        "description": "An internal operations platform for managing clients, work, employee workflows, and accounting. Recently extended with an AI assistant — approved employees can ask natural-language questions against company data, with usage, cost, and feedback tracked through an admin analytics dashboard."
+      },
+      {
+        "id": "accent",
+        "image": {
+          "src": "/images/portfolio/accent.webp",
+          "alt": "Accent desktop app personal meeting screen with launch controls and conference, huddle, and break room cards"
+        },
+        "badge": { "kind": "shipped", "label": "Shipped" },
+        "meta": "Client · 2025",
+        "title": "Accent",
+        "role": "Unified communications · desktop and mobile app",
+        "description": "An all-in-one business communications app: cloud phone, video meetings, team messaging, and third-party integrations brought into a single desktop and mobile experience. Built so teams can place calls, host conferences, and collaborate without bouncing between tools."
+      }
+    ]
   },
   "cta": {
     "title": [

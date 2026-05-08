@@ -15,7 +15,16 @@ const useImage = !!image;
 const fallbackVariant = variant ?? 'placeholder1';
 ---
 
-<div class:list={['shot', useImage ? 'shot-image' : `shot-${fallbackVariant}`]} aria-hidden={useImage ? undefined : 'true'}>
+<div
+  class:list={['shot', useImage ? 'shot-image' : `shot-${fallbackVariant}`]}
+  aria-hidden={useImage ? undefined : 'true'}
+  data-zoomable={useImage ? 'true' : undefined}
+  data-zoom-src={useImage ? image.src : undefined}
+  data-zoom-alt={useImage ? image.alt : undefined}
+  role={useImage ? 'button' : undefined}
+  tabindex={useImage ? 0 : undefined}
+  aria-label={useImage ? `Zoom in: ${image.alt}` : undefined}
+>
   <div class="shot-inner">
     {useImage && (
       <img
@@ -95,6 +104,13 @@ const fallbackVariant = variant ?? 'placeholder1';
     object-fit: cover;
     object-position: top center;
     display: block;
+  }
+  .shot[data-zoomable] {
+    cursor: zoom-in;
+  }
+  .shot[data-zoomable]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
   }
 
   .shot-foreman .shot-inner {
