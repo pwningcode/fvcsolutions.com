@@ -36,13 +36,13 @@
   --bg: #0d0f0d;
   --bg-2: #131613;
   --ink: #f1ede4;
-  --ink-dim: #b0ada0;
-  --ink-faint: #65635a;
-  --accent: #269C48;
+  --ink-dim: #d4cfc3;
+  --ink-faint: #9d9a8f;
+  --accent: #3FB85F;
   --accent-deep: #176332;
-  --accent-warm: #5cc97e;
-  --line: #1f2521;
-  --line-bright: #2e3530;
+  --accent-warm: #7ad698;
+  --line: #2a312c;
+  --line-bright: #3d4540;
 
   --serif: 'Instrument Serif', Georgia, serif;
   --sans: 'Manrope Variable', 'Manrope', system-ui, -apple-system, sans-serif;
