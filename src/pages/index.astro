@@ -8,6 +8,25 @@ import method from '../content/method.json';
 import engagement from '../content/engagement.json';
 import team from '../content/team.json';
 
+// Parse engagement price strings into structured Offer pricing.
+// "$5,000 · 2 weeks" → { price: "5000" }
+// "$15,000 — $30,000 · 4 to 8 weeks" → { minPrice: "15000", maxPrice: "30000" }
+const parsePrice = (priceStr: string) => {
+  const nums = priceStr.match(/\$([\d,]+)/g)?.map((m) => m.replace(/[$,]/g, '')) ?? [];
+  if (nums.length === 0) return null;
+  if (nums.length === 1) return { price: nums[0] };
+  return { minPrice: nums[0], maxPrice: nums[1] };
+};
+
+const persons = team.members.map((m) => ({
+  '@type': 'Person',
+  '@id': m.linkedin ? `${m.linkedin}#person` : `${site.url}/#person-${m.name.split(' ')[0].toLowerCase()}`,
+  name: m.name,
+  jobTitle: m.role,
+  worksFor: { '@id': `${site.url}/#org` },
+  ...(m.linkedin ? { sameAs: [m.linkedin] } : {}),
+}));
+
 const orgLd = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
@@ -16,34 +35,88 @@ const orgLd = {
   legalName: site.legalName,
   url: site.url,
   description: site.description,
+  slogan: site.shortDescription,
   foundingDate: site.founded,
-  areaServed: 'United States',
+  logo: {
+    '@type': 'ImageObject',
+    url: new URL('/icons/icon-512.png', site.url).toString(),
+    width: 512,
+    height: 512,
+  },
+  image: new URL('/og-image.png', site.url).toString(),
   address: {
     '@type': 'PostalAddress',
     addressLocality: site.location.city,
     addressRegion: site.location.regionCode,
     addressCountry: site.location.countryCode,
   },
+  areaServed: {
+    '@type': 'AdministrativeArea',
+    name: 'Greater Columbus, Ohio',
+    containedInPlace: {
+      '@type': 'State',
+      name: 'Ohio',
+      containedInPlace: { '@type': 'Country', name: 'United States' },
+    },
+  },
+  serviceArea: {
+    '@type': 'GeoCircle',
+    geoMidpoint: {
+      '@type': 'GeoCoordinates',
+      latitude: 39.9612,
+      longitude: -82.9988,
+    },
+    geoRadius: '80000',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    url: site.calendly.url,
+    availableLanguage: ['en'],
+  },
   sameAs: site.social.map((s) => s.url),
   knowsAbout: [
-    'Artificial intelligence',
-    'AI-powered applications',
-    'Custom software development',
-    'Document intelligence',
-    'Process automation',
+    'AI-powered application development',
+    'Retrieval-augmented generation',
+    'Document intelligence and extraction pipelines',
+    'Customer-facing AI assistants',
+    'AI evaluation harnesses',
+    'Process automation with AI in the loop',
+    'Internal tooling and workflow software',
+    'Custom software development for small business',
   ],
-  makesOffer: engagement.items.map((it) => ({
-    '@type': 'Offer',
-    name: it.name,
-    description: it.description,
-    category: it.tag,
-  })),
-  founder: team.members.map((m) => ({
-    '@type': 'Person',
-    name: m.name,
-    jobTitle: m.role,
-    sameAs: m.linkedin ? [m.linkedin] : undefined,
-  })),
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Engagements',
+    itemListElement: engagement.items.map((it) => {
+      const priceParts = parsePrice(it.price);
+      return {
+        '@type': 'Offer',
+        name: it.name,
+        description: it.description,
+        category: it.tag,
+        itemOffered: {
+          '@type': 'Service',
+          name: it.name,
+          description: it.description,
+          serviceType: it.name,
+          provider: { '@id': `${site.url}/#org` },
+          areaServed: { '@type': 'Country', name: 'United States' },
+        },
+        ...(priceParts
+          ? {
+              priceSpecification: {
+                '@type': 'PriceSpecification',
+                priceCurrency: 'USD',
+                ...priceParts,
+              },
+            }
+          : {}),
+      };
+    }),
+  },
+  founder: persons,
+  employee: persons,
 };
 
 const websiteLd = {
@@ -55,6 +128,19 @@ const websiteLd = {
   description: site.description,
   publisher: { '@id': `${site.url}/#org` },
   inLanguage: 'en-US',
+};
+
+const webPageLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${site.url}/#webpage`,
+  url: site.url,
+  name: `${site.name} — ${site.shortDescription}`,
+  description: site.description,
+  isPartOf: { '@id': `${site.url}/#website` },
+  about: { '@id': `${site.url}/#org` },
+  inLanguage: 'en-US',
+  dateModified: new Date().toISOString(),
 };
 
 // FAQ schema for AEO — generated from method + engagement
@@ -102,7 +188,7 @@ const faqLd = {
   title={`${site.name} — ${site.shortDescription}`}
   description={site.description}
   pathname="/"
-  jsonLd={[orgLd, websiteLd, faqLd]}
+  jsonLd={[orgLd, websiteLd, webPageLd, faqLd]}
 >
   <header class="hero">
     <div class="container">

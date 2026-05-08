@@ -20,9 +20,14 @@ const breadcrumbLd = {
 const contactLd = {
   '@context': 'https://schema.org',
   '@type': 'ContactPage',
+  '@id': `${site.url}/schedule#webpage`,
   url: `${site.url}/schedule`,
   name: 'Schedule a call',
   description: 'Tell us about your project, then book a 30-minute call.',
+  isPartOf: { '@id': `${site.url}/#website` },
+  about: { '@id': `${site.url}/#org` },
+  inLanguage: 'en-US',
+  dateModified: new Date().toISOString(),
 };
 ---
 

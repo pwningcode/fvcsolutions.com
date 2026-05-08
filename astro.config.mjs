@@ -26,6 +26,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png'],
       manifest: {
+        id: '/',
         name: 'FVC Solutions',
         short_name: 'FVC',
         description: 'AI-powered software for small business. Custom applications designed, built, and shipped by a small experienced team.',

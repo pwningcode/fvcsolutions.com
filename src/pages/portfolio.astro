@@ -18,8 +18,14 @@ const allWork = [...portfolio.active.items, ...portfolio.past.items];
 const collectionLd = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
+  '@id': `${site.url}/portfolio#webpage`,
   name: `Portfolio — ${site.name}`,
   url: `${site.url}/portfolio`,
+  description: 'Selected work from FVC Solutions — currently building Foreman Run and Down Bad, plus a sample of past client engagements in custom AI-powered software.',
+  isPartOf: { '@id': `${site.url}/#website` },
+  about: { '@id': `${site.url}/#org` },
+  inLanguage: 'en-US',
+  dateModified: new Date().toISOString(),
   mainEntity: {
     '@type': 'ItemList',
     itemListElement: allWork.map((w, i) => ({

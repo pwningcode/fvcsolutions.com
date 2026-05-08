@@ -11,6 +11,7 @@ interface Props {
   pathname: string;
   ogTitle?: string;
   ogDescription?: string;
+  ogImageAlt?: string;
   jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>;
   noindex?: boolean;
 }
@@ -21,12 +22,14 @@ const {
   pathname,
   ogTitle,
   ogDescription,
+  ogImageAlt,
   jsonLd,
   noindex = false,
 } = Astro.props;
 
 const canonical = new URL(pathname, site.url).toString();
 const ogImage = new URL('/og-image.png', site.url).toString();
+const ogImageAltText = ogImageAlt ?? `${site.name} — ${site.shortDescription}`;
 const fullTitle = pathname === '/' ? title : `${title} — ${site.name}`;
 
 const ldJson = jsonLd
@@ -45,6 +48,8 @@ const ldJson = jsonLd
 
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
+  <meta name="author" content={site.name} />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <link rel="canonical" href={canonical} />
 
   {noindex && <meta name="robots" content="noindex, nofollow" />}
@@ -59,7 +64,7 @@ const ldJson = jsonLd
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="alternate icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
 
   <link rel="preload" href="/fonts/instrument-serif-latin-400.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/manrope-latin-wght.woff2" as="font" type="font/woff2" crossorigin />
@@ -72,12 +77,14 @@ const ldJson = jsonLd
   <meta property="og:image" content={ogImage} />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={ogImageAltText} />
   <meta property="og:locale" content="en_US" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={ogTitle ?? fullTitle} />
   <meta name="twitter:description" content={ogDescription ?? description} />
   <meta name="twitter:image" content={ogImage} />
+  <meta name="twitter:image:alt" content={ogImageAltText} />
 
   <link rel="sitemap" href="/sitemap-index.xml" />
 

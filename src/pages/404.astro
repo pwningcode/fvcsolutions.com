@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RichTitle from '../components/RichTitle.astro';
+---
+
+<BaseLayout
+  title="Page not found"
+  description="The page you're looking for doesn't exist."
+  pathname="/404"
+  noindex={true}
+>
+  <section class="notfound">
+    <div class="container">
+      <div class="code">404</div>
+      <h1>
+        <RichTitle segments={[
+          { text: 'That page ' },
+          { text: "doesn't exist.", italic: true }
+        ]} />
+      </h1>
+      <p class="lede">The link may be broken, or the page may have moved. Try one of these:</p>
+      <div class="links">
+        <a href="/" class="btn btn-primary btn-arrow">Home</a>
+        <a href="/portfolio" class="btn btn-ghost">Portfolio</a>
+        <a href="/schedule" class="btn btn-ghost">Schedule a call</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound {
+    padding: 160px 0;
+    text-align: center;
+  }
+  .code {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 32px;
+  }
+  .notfound h1 {
+    font-family: var(--serif);
+    font-size: clamp(48px, 7vw, 84px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    font-weight: 400;
+  }
+  .notfound h1 :global(em) { font-style: italic; color: var(--accent-warm); }
+  .lede {
+    color: var(--ink-dim);
+    font-size: 18px;
+    max-width: 480px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+  }
+  .links {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>

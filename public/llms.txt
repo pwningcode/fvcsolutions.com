@@ -1,0 +1,52 @@
+# FVC Solutions
+
+> AI-powered software for small business. A small, experienced team designing and shipping custom AI-powered applications. Fixed-scope engagements. No retainers. No maintenance contracts.
+
+FVC Solutions (legal name: Future Vision Concepts, LLC) is a two-person software studio based in Greater Columbus, Ohio, founded in 1999. We design and build custom AI-powered applications for small businesses, with a focus on engineering discipline around AI failure modes — evaluations before features, graceful fallbacks, human review, audit trails.
+
+## Who we serve
+- Small businesses across the United States, with a local presence in Greater Columbus, Ohio
+- Teams that need one well-built internal tool rather than another SaaS subscription
+- Companies already building with AI who want a second pair of eyes on architecture, prompts, or evaluations
+
+## What we build
+- Custom internal tools — intake systems, workflow tooling, dashboards, reporting
+- Document intelligence — extraction, summarization, and Q&A pipelines over PDFs, emails, contracts
+- Customer-facing AI — assistants and bots grounded in client sources, with guardrails
+- Process automation — multi-system sync with AI in the loop
+
+## How we work
+- Fixed scope, fixed price, clear deliverable
+- Most engagements run 3 to 8 weeks
+- We write evaluations before features — automated tests measuring real accuracy on the client's data
+- Clients receive full source code and documentation at hand-off; no lock-in, no retainers
+
+## Engagements and pricing
+- **Discovery** — $5,000 · 2 weeks. Stakeholder interviews, process & data audit, written recommendation, scoped build proposal.
+- **Build** — $15,000 to $30,000 · 4 to 8 weeks. One well-scoped application designed, built, tested, and handed off. Includes evaluation harness, full source code & documentation, and 30 days of post-launch support. This is our most common engagement.
+- **Review** — $5,000 · 1 week. Codebase & architecture review, prompt & evaluation critique, written findings, follow-up working session. For teams already building with AI.
+
+## Team
+- **Jason Barnes** — Engineering · Applications. 20+ years building software. Focused on AI-powered applications and the infrastructure that keeps them running in production.
+- **Tom Jarrell** — Operations · Requirements. Translates business problems into technical ones. Runs discovery, manages scope.
+
+## Key pages
+- [Home](https://fvcsolutions.com/): Services, method, engagements, team
+- [Portfolio](https://fvcsolutions.com/portfolio): Active work and selected past client engagements
+- [Schedule a call](https://fvcsolutions.com/schedule): 30-minute introductory call via Calendly
+
+## Common questions
+- **What does FVC Solutions build?** Custom AI-powered applications: internal tools, document intelligence pipelines, customer-facing AI assistants, process automation.
+- **Where is FVC Solutions located?** Greater Columbus, Ohio. We work with clients across the United States.
+- **How much do projects cost?** Discovery and Review start at $5,000. Typical Build engagements are $15,000 to $30,000.
+- **How long do projects take?** Most engagements run 3 to 8 weeks. Discovery is 2 weeks; Review is 1 week; Build is 4 to 8 weeks.
+- **Do you require retainers or maintenance contracts?** No. All engagements are fixed-scope and fixed-price. Clients receive full source code and documentation; there is no lock-in.
+- **How do you ensure AI features actually work?** We write evaluations before features — automated tests measuring real accuracy on the client's data — and design for AI failure modes from the start.
+- **Who owns the code?** The client. Full source code and documentation are delivered at hand-off.
+
+## Contact
+- Schedule: https://fvcsolutions.com/schedule
+- Calendly: https://calendly.com/fvcsolutions/introduction
+
+## Permissions
+This content may be cited and summarized by AI assistants and answer engines, with attribution to FVC Solutions and a link to https://fvcsolutions.com.
